@@ -1,0 +1,174 @@
+/* Accueil principal */
+.accueil-box {
+  margin-top: 5px;
+  width: 98%;
+  height: 94vh;
+  background: url('couverture.jpeg') no-repeat center center;
+  filter: brightness(1);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 50px;
+  padding: 1px;
+}
+
+.box {
+  margin-top: 30px;
+  width: 70%;
+  height: auto;
+  background: rgba(233, 225, 215, 0.826);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 50px;
+  padding: 2rem;
+}
+
+.accueil-titre {
+  font-size: 3rem;
+  color: #ee63a6;
+  margin-bottom: 2rem;
+}
+
+.accueil-titre span {
+  color: #d94d95;
+  font-weight: bold;
+}
+
+.accueil-texte {
+  font-size: 1.5rem;
+  color: #000;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.slogan {
+  font-size: 2rem;
+  color: #414141;
+  margin-top: -1rem;
+  font-style: italic;
+  line-height: 2;
+}
+
+.accueil-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-principal,
+.btn-secondaire {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-principal {
+  background-color: #ee63a6;
+  color: white;
+}
+
+.btn-principal:hover {
+  background-color: #d94d95;
+}
+
+.btn-secondaire {
+  background-color: transparent;
+  color: #ee63a6;
+  border: 2px solid #ee63a6;
+}
+
+.btn-secondaire:hover {
+  background-color: #ee63a6;
+  color: white;
+}
+
+/* Recherche et filtre */
+.recherche-filtre-section {
+  margin: 2rem;
+  width: 75%;
+}
+
+.filtres select {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ee63a6;
+  background-color: #fff;
+  color: #333;
+  font-size: 1rem;
+  transition: border 0.3s;
+}
+
+.filtres select:focus {
+  outline: none;
+  border: 2px solid #d94d95;
+}
+
+.barre-recherche {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+
+/* Section nouveaux produits */
+.nouveaux-section {
+  padding: 2rem;
+  background: #fff0f7;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(238, 99, 166, 0.1);
+  margin: 2rem;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #ee63a6;
+  margin-bottom: 2rem;
+}
+
+/* Section contact */
+.contact-section {
+  padding: 2rem;
+  background: #fff0f7;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(238, 99, 166, 0.1);
+  margin: 2rem;
+}
+
+.contact-title {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: #ee63a6;
+}
+
+.contact-text {
+  font-size: 1.1rem;
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+
+.contact-info p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+.contact-info a {
+  color: #d94d95;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}

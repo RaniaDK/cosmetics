@@ -1,0 +1,41 @@
+/* Style global */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+/* Header */
+header {
+  background-color: #fff;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  padding: 5px 0;
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  border-radius: 30px;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.logo span {
+  color: #ee63a6;
+  font-size: 26px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-transform: uppercase;
+}

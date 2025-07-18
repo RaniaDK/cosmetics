@@ -1,0 +1,91 @@
+.apropos-container {
+  padding: 3rem 1.5rem;
+  max-width: 900px;
+  margin: 2rem auto 4rem auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.75;
+  color: #3a3a3a;
+  background: linear-gradient(135deg, #fff0f7 0%, #ffe3f0 100%);
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(238, 99, 166, 0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+.apropos-container:hover {
+  box-shadow: 0 15px 35px rgba(238, 99, 166, 0.25);
+}
+
+.hero-apropos {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.hero-apropos h1 {
+  font-size: 3rem;
+  color: #ee63a6;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+.hero-apropos span {
+  color: #d13477;
+  font-style: italic;
+}
+
+.hero-apropos p {
+  margin-top: 0.7rem;
+  font-style: italic;
+  font-size: 1.3rem;
+  color: #6e6e6e;
+}
+
+.contenu-apropos h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #d13477;
+  font-weight: 600;
+  border-bottom: 2px solid #ee63a6;
+  padding-bottom: 0.3rem;
+}
+
+.contenu-apropos p {
+  margin-bottom: 1.2rem;
+  font-size: 1.05rem;
+}
+
+.contenu-apropos ul {
+  padding-left: 1.7rem;
+  margin-bottom: 2rem;
+  list-style-type: disc;
+  color: #4b4b4b;
+}
+
+.contenu-apropos li {
+  margin-bottom: 0.6rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.contenu-apropos li strong {
+  color: #d13477;
+}
+
+.contenu-apropos li:hover {
+  color: #ee63a6;
+  cursor: default;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .apropos-container {
+    padding: 2rem 1rem;
+  }
+
+  .hero-apropos h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-apropos p {
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,169 @@
+/* Style global */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+  
+}
+
+/* Header */
+header {
+  background-color: #fff;
+  box-shadow: 0 5px 3px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 2000;
+  border-radius: 30px;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.logo span {
+  color: #ee63a6;
+  font-size: 26px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-transform: uppercase;
+}
+
+
+
+
+
+
+.center-container {
+  width: 98%;
+  height: 94vh;
+  color: #333;
+  background: url('couverture.jpeg') no-repeat center center;
+  background-size: cover;
+  filter: brightness(1); /* L'image est claire, sans effet */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 50px;
+  padding: 1px;
+  position: relative;
+  
+  
+}
+
+.box-container {
+  background: white;
+  padding: 2rem 2.5rem;
+  border-radius: 50px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+  
+}
+
+.box-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+.formulaire .form-group {
+  margin-bottom: 1.2rem;
+}
+.formulaire label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  color: #444;
+}
+.formulaire input {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border 0.3s ease;
+  font-size: 1rem;
+}
+.formulaire input:focus {
+  border-color: #ee63a6;
+}
+.btn-inscription {
+  width: 100%;
+  background-color: #ee63a6;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease,transform 0.2s ease;
+}
+
+.btn-inscription:hover {
+  background-color: #ee63a6;
+  transform: scale(1.03);
+}
+.form-title {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #ee63a6;
+  margin-bottom: 1.5rem;
+}
+.register-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.register-link a {
+  color: #ee63a6;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/*overlay*/
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-fermer {
+  margin-top: 1rem;
+  background-color: #ee63a6;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
