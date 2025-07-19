@@ -12,7 +12,7 @@ function Admin() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [adminNom, setAdminNom] = useState("");
   const navigate = useNavigate();
-console.log("admin page")
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
@@ -22,7 +22,7 @@ console.log("admin page")
       return;
     }
 
-    setAdminNom(localStorage.getItem("admin_nom") || "Admin");
+    setAdminNom(localStorage.getItem("nom") || "Admin");
 
     fetch("http://localhost:5000/api/statistiques", {
       headers: {
@@ -43,7 +43,7 @@ console.log("admin page")
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("admin_nom");
+    localStorage.removeItem("nom");
     localStorage.removeItem("role");
     navigate("/Accueil");
   };
@@ -64,7 +64,7 @@ console.log("admin page")
             <FontAwesomeIcon icon={faChartBar} /> <span>Produits</span>
           </a>
           <a href="/Categories" className="nav-item">
-            <FontAwesomeIcon icon={faUsers} /> <span>Catégorie</span>
+            <FontAwesomeIcon icon={faBox} /> <span>Catégorie</span>
           </a>
           <a href="/Commandes" className="nav-item">
             <FontAwesomeIcon icon={faShoppingCart} /> <span>Commandes</span>
@@ -85,7 +85,7 @@ console.log("admin page")
             <span>R</span>ania <span>B</span>eauty
           </div>
           <div className="user-profile">
-            <span>Bienvenue {adminNom}.</span>
+            <span>Bienvenue {adminNom}</span>
             <img src="" alt="User Avatar" className="avatar" />
           </div>
         </header>

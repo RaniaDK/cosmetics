@@ -32,14 +32,8 @@ function Panier() {
     }
   };
 
-  // Calcul du total panier
   const total = panier.reduce((acc, item) => acc + item.prix * item.quantite, 0);
-  if (!id_utilisateur) {
-    return <p className="panier-vide">Veuillez vous connecter pour voir votre compte.</p>;
-  }
-  if (panier.length === 0) {
-    return <p className="panier-vide">Votre panier est vide.</p>;
-  }
+
   return (
     <div className="panier-container">
       <h2 className="panier-title">Votre Panier</h2>
@@ -54,23 +48,40 @@ function Panier() {
           </tr>
         </thead>
         <tbody>
-          {panier.map(({ id, nom, prix, quantite }) => (
-            <tr key={id}>
-              <td>{nom}</td>
-              <td>{parseFloat(prix).toFixed(2)} TND</td>
-              <td>{quantite}</td>
-              <td>{(parseFloat(prix) * quantite).toFixed(2)} TND</td>
-              <td>
-                <button className="btn-supprimer" onClick={() => supprimerProduit(id)}> Supprimer </button>
-              </td>
+          {!id_utilisateur ? (
+            <tr>
+              <td colSpan="5" className="panier-vide">Veuillez vous connecter pour voir votre panier.</td>
             </tr>
-          ))}
+          ) : panier.length === 0 ? (
+            <tr>
+              <td colSpan="5" className="panier-vide">Votre panier est vide.</td>
+            </tr>
+          ) : (
+            panier.map(({ id, nom, prix, quantite }) => (
+              <tr key={id}>
+                <td>{nom}</td>
+                <td>{parseFloat(prix).toFixed(2)} TND</td>
+                <td>{quantite}</td>
+                <td>{(parseFloat(prix) * quantite).toFixed(2)} TND</td>
+                <td>
+                  <button className="btn-supprimer" onClick={() => supprimerProduit(id)}>Supprimer</button>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
-      <h3 className="total-panier">Total : {total.toFixed(2)} TND </h3>
-      <div className="btn-container">
-        <button className="btn-commander"  onClick={() => alert("Fonction de commande à implémenter")} >  Passer à la commande </button>
-      </div>
+
+      {id_utilisateur && panier.length > 0 && (
+        <>
+          <h3 className="total-panier">Total : {total.toFixed(2)} TND</h3>
+          <div className="btn-container">
+            <button className="btn-commander" onClick={() => alert("Fonction de commande à implémenter")}>
+              Passer à la commande
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Produits.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTachometerAlt,faChartBar,faUsers,faShoppingCart,faSignOutAlt,faBars,faEdit,faTrash,} from "@fortawesome/free-solid-svg-icons";
+import { faTachometerAlt,faChartBar,faShoppingCart,faSignOutAlt,faBars,faEdit,faTrash,faBox} from "@fortawesome/free-solid-svg-icons";
 import AjouterCategorie from "./AjouterCategorie";
 import ModifierCategories from "./ModifierCategories";
 
@@ -85,7 +85,7 @@ function Categories() {
             <FontAwesomeIcon icon={faChartBar} /> <span>Produits</span>
           </a>
           <a href="/Categories" className="nav-item active">
-            <FontAwesomeIcon icon={faUsers} /> <span>Catégories</span>
+            <FontAwesomeIcon icon={faBox} /> <span>Catégories</span>
           </a>
           <a href="/commande" className="nav-item">
             <FontAwesomeIcon icon={faShoppingCart} /> <span>Commandes</span>
