@@ -25,9 +25,8 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage });
 
-// GET tous les produits
+const upload = multer({ storage });
 router.get('/', async (req, res) => {
   try {
     const result = await db.query(`
@@ -42,7 +41,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET un produit par ID
+
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -58,25 +57,22 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST - Ajouter un produit
+
 router.post('/', upload.single('image'), async (req, res) => {
   try {
     const { nom, description, prix, stock, categorie_id } = req.body;
     const image_url = req.file ? req.file.filename : null;
-
     if (!nom || !description || !prix || !stock || !categorie_id) {
       return res.status(400).json({ message: 'Certains champs sont manquants (nom, description, prix, stock, categorie_id).' });
     }
     if (!image_url) {
       return res.status(400).json({ message: "L'image est obligatoire." });
     }
-
     const query = `
       INSERT INTO produits (nom, description, prix, stock, categorie_id, image_url)
       VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *`;
     const values = [nom, description, prix, stock, categorie_id, image_url];
-
     const result = await db.query(query, values);
     res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -85,7 +81,7 @@ router.post('/', upload.single('image'), async (req, res) => {
   }
 });
 
-// DELETE - Supprimer un produit
+
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -93,7 +89,6 @@ router.delete('/:id', async (req, res) => {
     if (check.rows.length === 0) {
       return res.status(404).json({ message: 'Produit non trouvé' });
     }
-    // Supprimer l'image du serveur
     const image_url = check.rows[0].image_url;
     const imagePath = path.join(imagesDir, image_url);
     if (fs.existsSync(imagePath)) {
@@ -107,7 +102,7 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// PUT - Modifier un produit
+
 router.put('/:id', upload.single('image'), async (req, res) => {
   try {
     const { id } = req.params;
@@ -115,27 +110,19 @@ router.put('/:id', upload.single('image'), async (req, res) => {
     if (produit.rows.length === 0) {
       return res.status(404).json({ message: 'Produit non trouvé' });
     }
-
     let image_url = produit.rows[0].image_url;
-
     if (req.file) {
-      // Supprimer l'ancienne image
       const ancienImagePath = path.join(imagesDir, image_url);
       if (fs.existsSync(ancienImagePath)) {
         fs.unlinkSync(ancienImagePath);
       }
       image_url = req.file.filename;
     }
-
-
     const { nom, description, prix, stock, categorie_id } = req.body;
-
     const query = `UPDATE produits SET nom = $1, description = $2, prix = $3,
       stock = $4, categorie_id = $5, image_url = $6 WHERE id = $7 RETURNING *`;
-
     const values = [nom, description, prix, stock, categorie_id, image_url, id];
     const result = await db.query(query, values);
-
     res.json(result.rows[0]);
   } catch (err) {
     console.error('Erreur modification produit:', err);

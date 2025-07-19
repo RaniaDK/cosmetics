@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../db');
 
 // POST ajouter un avis
-/*router.post('/', async (req, res) => {
+/*router.post('/utilisateur/:id', async (req, res) => {
   const { id_utilisateur, id_produit, note, commentaire } = req.body;
 
   try {

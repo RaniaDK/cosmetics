@@ -1,0 +1,92 @@
+.panier-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  background: linear-gradient(to right, #fff5f9, #ffe9f0);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(238, 99, 166, 0.15);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.panier-title {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 30px;
+  color: #ee63a6;
+}
+
+.panier-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.panier-table th {
+  background-color: #ee63a6;
+  color: white;
+  padding: 15px;
+  font-size: 1em;
+}
+
+.panier-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #f3d6e2;
+}
+
+.input-quantite {
+  width: 70px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 1em;
+}
+
+.btn-supprimer {
+  background-color: #ee5d73;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-supprimer:hover {
+  background-color: #e03d5d;
+}
+
+.btn-commander {
+  background-color: #ee63a6;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-weight: bold;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-commander:hover {
+  background-color: #d94c91;
+}
+
+.total-panier {
+  text-align: right;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #333;
+  margin-top: 20px;
+}
+
+.panier-vide {
+  text-align: center;
+  color: #f68ccd;
+  font-size: 2em;
+  padding: 40px;
+}

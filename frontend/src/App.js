@@ -12,6 +12,7 @@ import AjouterCategorie from './admin/categories/AjouterCategorie';
 import ModifierCategories from './admin/categories/ModifierCategories';
 import Admin from "./admin/Admin";
 import APropos from "./index/APropos";
+import Panier from "./index/Panier";
 
 import "./App.css";
 
@@ -45,6 +46,7 @@ function AppContent() {
         <Route path="/modifier-categorie" element={<ModifierCategories />} />
         <Route path="/Admin" element={<Admin />} />
         <Route path="/APropos" element={<APropos />} />
+        <Route path="/Panier" element={<Panier />} />
       </Routes>
     </>
   );

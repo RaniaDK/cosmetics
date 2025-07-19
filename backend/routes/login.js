@@ -25,7 +25,7 @@ router.post("/login", async (req, res) => {
       expiresIn: "2h",
     });
 
-    res.json({ token, nom: user.nom });  // renvoie le nom ici
+    res.json({ token, nom: user.nom }); 
   } catch (err) {
     console.error("Erreur de connexion :", err);
     res.status(500).json({ message: "Erreur serveur." });

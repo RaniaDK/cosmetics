@@ -5,11 +5,9 @@ const router = express.Router();
 
 router.post("/inscription", async (req, res) => {
   const { nom, email, mot_de_passe } = req.body;
-
   if (!nom || !email || !mot_de_passe) {
     return res.status(400).json({ message: "Champs manquants" });
   }
-
   try {
     // 🔒 Hasher le mot de passe
     const hashedPassword = await bcrypt.hash(mot_de_passe, 10);
@@ -19,7 +17,6 @@ router.post("/inscription", async (req, res) => {
       "INSERT INTO utilisateurs (nom, email, mot_de_passe, role) VALUES ($1, $2, $3, $4)",
       [nom, email, hashedPassword, "client"]
     );
-
     res.status(201).json({ message: "Utilisateur inscrit avec succès" });
   } catch (err) {
     console.error("Erreur lors de l'inscription :", err);

@@ -31,6 +31,7 @@ function Inscription() {
         //
         setPopupMessage("✅ Inscription réussie !");
         setPopupVisible(true);
+        window.location.href = "/connexion";
       } else {
         //
         setPopupMessage("❌ Erreur : " + data.message);

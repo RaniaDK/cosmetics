@@ -21,6 +21,7 @@ function Header() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     localStorage.removeItem("nom");
+    localStorage.removeItem("utilisateur_id");
     setNom(null);
     navigate("/Accueil");
   };
@@ -36,7 +37,6 @@ function Header() {
           <li><ScrollLink to="contact" smooth={true} duration={500}>Contact</ScrollLink></li>
           <li><Link to="/Panier">Panier</Link></li>
           <li><Link to="/APropos"> À propres</Link></li>
-
           {nom ? (
             <>
               <li className="nom-client" aria-label={`Bienvenue ${nom}`}> Bienvenue <strong>{nom}</strong>

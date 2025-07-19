@@ -3,7 +3,8 @@ import "./NouveauxProduits.css";
 
 function NouveauxProduits() {
   const [produits, setProduits] = useState([]);
-
+    const [popupMessage, setPopupMessage] = useState("");
+  const [popupVisible, setPopupVisible] = useState(false);
   useEffect(() => {
     fetch("http://localhost:5000/api/produits")
       .then((res) => res.json())
@@ -19,36 +20,39 @@ function NouveauxProduits() {
     return acc;
   }, {});
 
-  const ajouterAuPanier = async (produit) => {
-    try {
-      const res = await fetch("http://localhost:5000/api/panier", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id_produit: produit.id,
-          quantite: 1,
-        }),
-      });
 
-      if (res.ok) {
-        alert(`${produit.nom} ajouté au panier ✅`);
-      } else {
-        alert("Erreur lors de l'ajout au panier ❌");
-      }
-    } catch (err) {
-      console.error("Erreur panier :", err);
-      alert("Erreur réseau ❌");
-    }
-  };
+const id_utilisateur = localStorage.getItem("utilisateur_id"); 
+const ajouterAuPanier = async (id_produit) => {
+  try {
+    const res = await fetch("http://localhost:5000/api/panier", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`, 
+      },
+      body: JSON.stringify({
+        id_utilisateur: parseInt(id_utilisateur), 
+        id_produit,
+       
+      }),
+    });
+
+    const data = await res.json();
+    setPopupMessage(data.message);
+    setPopupVisible(true);
+  } catch (err) {
+    console.error("Erreur panier :", err);
+  }
+};
+
 
   return (
+    <div>
     <section className="nouveaux-section-custom">
       <h2 className="section-title">✨ Produits par catégorie</h2>
-
       {Object.entries(produitsParCategorie).map(([categorie_nom, produits]) => (
         <div key={categorie_nom} id={categorie_nom.toLowerCase()} className="categorie-section">
           <h2 className="categorie-titre">🧴 {categorie_nom}</h2>
-
           <div className="categories">
             {produits.map((produit) => (
               <div className="category-box" key={produit.id}>
@@ -62,13 +66,21 @@ function NouveauxProduits() {
                 )}
                 <h4>{produit.description}</h4>
                 <p><strong>{produit.prix} TND</strong></p>
-                <button className="btn-panier" onClick={() => ajouterAuPanier(produit)}>  Ajouter au panier 🛍️</button>
+                <button className="btn-panier" onClick={() => ajouterAuPanier(produit.id)}> Ajouter au panier 🛍️ </button>
               </div>
             ))}
           </div>
         </div>
       ))}
     </section>
+          {popupVisible && (
+        <div className="overlay" id="popupMessage">
+          <div className="popup-box">
+            <p>{popupMessage}</p>
+            <button onClick={() => setPopupVisible(false)} className="btn-fermer">Fermer</button>
+          </div>
+        </div>)}
+        </div>
   );
 }
 
