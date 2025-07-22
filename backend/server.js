@@ -34,3 +34,7 @@ app.use("/api/categories", categoriesRouter);
 
 const statistiquesRoutes = require("./routes/statistiques");
 app.use("/api", statistiquesRoutes);
+
+const commandesRoutes = require('./routes/commandes');
+app.use('/api/commandes', commandesRoutes);
+

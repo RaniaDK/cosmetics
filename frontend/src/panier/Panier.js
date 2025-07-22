@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./Panier.css";
+import Commandes from "./Commandes";
 
 function Panier() {
   const id_utilisateur = localStorage.getItem("utilisateur_id");
   const [panier, setPanier] = useState([]);
+  const [confirmerCommandeVisible, setConfirmerCommandeVisible] = useState(false);
 
   useEffect(() => {
     const fetchPanier = async () => {
@@ -36,7 +38,7 @@ function Panier() {
 
   return (
     <div className="panier-container">
-      <h2 className="panier-title">Votre Panier</h2>
+      <h2 className="panier-title">Mon Panier</h2>
       <table className="panier-table">
         <thead>
           <tr>
@@ -76,11 +78,38 @@ function Panier() {
         <>
           <h3 className="total-panier">Total : {total.toFixed(2)} TND</h3>
           <div className="btn-container">
-            <button className="btn-commander" onClick={() => alert("Fonction de commande à implémenter")}>
+            <button
+              className="btn-commander"
+              onClick={() => setConfirmerCommandeVisible(true)}
+            >
               Passer à la commande
             </button>
           </div>
         </>
+      )}
+
+      {confirmerCommandeVisible && (
+        <div className="overlay">
+          <div className="popup-box">
+            <Commandes
+              panier={panier}
+              total={total}
+              utilisateurId={id_utilisateur}
+              onClose={() => setConfirmerCommandeVisible(false)}
+             onCommandeSuccess={async () => {
+              try {
+                await fetch(`http://localhost:5000/api/panier/utilisateur/${id_utilisateur}`, {
+                  method: 'DELETE',
+                });
+                setPanier([]); 
+              } catch (err) {
+                console.error('Erreur lors du vidage du panier après commande', err);
+              }
+            }}
+
+            />
+          </div>
+        </div>
       )}
     </div>
   );

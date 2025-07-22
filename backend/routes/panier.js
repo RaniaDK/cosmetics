@@ -40,11 +40,13 @@ router.get('/utilisateur/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const result = await db.query(`
-      SELECT p.id, pr.nom, pr.prix, p.quantite
+      SELECT p.id_produit, p.quantite, pr.nom, pr.prix
       FROM panier p
       JOIN produits pr ON p.id_produit = pr.id
-      WHERE p.id_utilisateur = $1
+      WHERE p.id_utilisateur = $1;
+
     `, [id]);
+    res.json(result.rows);
     res.status(200).json(result.rows);
   } catch (err) {
     console.error("Erreur lors de la récupération du panier :", err);
@@ -67,5 +69,17 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ message: 'Erreur serveur' });
   }
 });
+
+router.delete('/utilisateur/:id_utilisateur', async (req, res) => {
+  const { id_utilisateur } = req.params;
+  try {
+    await db.query('DELETE FROM panier WHERE id_utilisateur = $1', [id_utilisateur]);
+    res.status(200).json({ message: 'Panier vidé avec succès' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Erreur lors de la suppression du panier' });
+  }
+});
+
 
 module.exports = router;

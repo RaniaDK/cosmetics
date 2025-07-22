@@ -57,7 +57,7 @@ function AjouterProduits({ onClose }) {
         },
         body: formData,
       });
-          if (!res.ok) {
+    if (!res.ok) {
       const data = await res.json();
       setPopupMessage(`Erreur lors de l'ajout du produit : ${data.message || "Erreur inconnue"}`);
       setPopupVisible(true);
@@ -87,7 +87,7 @@ function AjouterProduits({ onClose }) {
         <form className="modifier-form" onSubmit={handleSubmit}>
           <input type="text"  name="nom"  value={produit.nom}  onChange={handleChange}  placeholder="Nom"  required/>
           <textarea name="description" value={produit.description} onChange={handleChange} placeholder="Description" required/>
-          <input type="number" name="prix" value={produit.prix} onChange={handleChange} placeholder="Prix" required min="0" step="0.01"/>
+          <input type="float" name="prix" value={produit.prix} onChange={handleChange} placeholder="Prix" required min="0" step="0.01"/>
           <input type="number" name="stock" value={produit.stock} onChange={handleChange} placeholder="Stock" required min="0" step="1"/>
           <select name="categorie_id" value={produit.categorie_id} onChange={(e) => handleChange({target: { name: "categorie_id", value: parseInt(e.target.value) || "" }})} required>
             <option value="">-- Choisir une catégorie --</option>
@@ -96,9 +96,6 @@ function AjouterProduits({ onClose }) {
             ))}
           </select>
           <label>Image :</label>
-          {/* {preview && (
-            <img src={preview} alt="Preview" />
-          )} */}
           <input type="file" name="image" onChange={handleFileChange} accept="image/*" required/>
           <div className="modifier-buttons">
             <button type="submit" className="btn-cancel"> Ajouter</button>

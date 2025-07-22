@@ -12,7 +12,8 @@ import AjouterCategorie from './admin/categories/AjouterCategorie';
 import ModifierCategories from './admin/categories/ModifierCategories';
 import Admin from "./admin/Admin";
 import APropos from "./index/APropos";
-import Panier from "./index/Panier";
+import Panier from "./panier/Panier";
+import Commandes from "./panier/Commandes";
 
 import "./App.css";
 
@@ -24,7 +25,8 @@ function AppContent() {
     "/modifier-produit",
     "/ajouter-produit",
     "/ajouter-categorie",
-    "/Categories"
+    "/Categories",
+    "/Commandes"
   ];
   const shouldHideHeader = hideHeaderPaths.some(path => location.pathname.startsWith(path));
 
@@ -47,6 +49,7 @@ function AppContent() {
         <Route path="/Admin" element={<Admin />} />
         <Route path="/APropos" element={<APropos />} />
         <Route path="/Panier" element={<Panier />} />
+        <Route path="/Commandes" element={<Commandes />} />
       </Routes>
     </>
   );

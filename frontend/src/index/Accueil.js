@@ -7,7 +7,7 @@ import AvisClients from "./Avis";
 function Accueil() {
   const [searchTerm, setSearchTerm] = useState("");
   const [categorie, setCategorie] = useState("");
-  const [categories, setCategories] = useState([]); // ✅ Corrigé ici
+  const [categories, setCategories] = useState([]); 
 
   useEffect(() => {
     fetch("http://localhost:5000/api/categories")
@@ -56,10 +56,10 @@ function Accueil() {
 
   return (
     <div>
-      <div className="recherche-filtre-section">
+      {/* <div className="recherche-filtre-section">
         <BarreRecherche />
         <Filtres />
-      </div>
+      </div> */}
 
       <section className="accueil-box">
         <div className="box">
