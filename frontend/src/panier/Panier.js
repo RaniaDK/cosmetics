@@ -22,13 +22,15 @@ function Panier() {
     fetchPanier();
   }, [id_utilisateur]);
 
-  const supprimerProduit = async (id) => {
+  const supprimerProduit = async (id_produit) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/panier/${id}`, {
+      const res = await fetch(`http://localhost:5000/api/panier/${id_utilisateur}/${id_produit}`, {
         method: "DELETE",
       });
+
       if (!res.ok) throw new Error("Erreur suppression");
-      setPanier((prevPanier) => prevPanier.filter((item) => item.id !== id));
+
+      setPanier((prevPanier) => prevPanier.filter((item) => item.id_produit !== id_produit));
     } catch (error) {
       console.error("Erreur lors de la suppression du produit :", error);
     }
@@ -59,14 +61,14 @@ function Panier() {
               <td colSpan="5" className="panier-vide">Votre panier est vide.</td>
             </tr>
           ) : (
-            panier.map(({ id, nom, prix, quantite }) => (
-              <tr key={id}>
+            panier.map(({ id_produit, nom, prix, quantite }) => (
+              <tr key={id_produit}>
                 <td>{nom}</td>
                 <td>{parseFloat(prix).toFixed(2)} TND</td>
                 <td>{quantite}</td>
                 <td>{(parseFloat(prix) * quantite).toFixed(2)} TND</td>
                 <td>
-                  <button className="btn-supprimer" onClick={() => supprimerProduit(id)}>Supprimer</button>
+                  <button className="btn-supprimer" onClick={() => supprimerProduit(id_produit)}>Supprimer</button>
                 </td>
               </tr>
             ))
