@@ -66,7 +66,7 @@ function Admin() {
           <a href="/Categories" className="nav-item">
             <FontAwesomeIcon icon={faBox} /> <span>Catégorie</span>
           </a>
-          <a href="/Commandes" className="nav-item">
+          <a href="/Commande" className="nav-item">
             <FontAwesomeIcon icon={faShoppingCart} /> <span>Commandes</span>
           </a>
           <button onClick={handleLogout} className="nav-item">

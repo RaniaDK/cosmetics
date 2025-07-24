@@ -80,12 +80,7 @@ function Panier() {
         <>
           <h3 className="total-panier">Total : {total.toFixed(2)} TND</h3>
           <div className="btn-container">
-            <button
-              className="btn-commander"
-              onClick={() => setConfirmerCommandeVisible(true)}
-            >
-              Passer à la commande
-            </button>
+            <button className="btn-commander" onClick={() => setConfirmerCommandeVisible(true)}>  Passer à la commande</button>
           </div>
         </>
       )}
@@ -107,14 +102,11 @@ function Panier() {
               } catch (err) {
                 console.error('Erreur lors du vidage du panier après commande', err);
               }
-            }}
-
-            />
+            }}/>
           </div>
         </div>
       )}
     </div>
   );
 }
-
 export default Panier;

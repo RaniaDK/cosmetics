@@ -43,7 +43,6 @@ router.get('/utilisateur/:id', async (req, res) => {
       JOIN produits pr ON p.id_produit = pr.id
       WHERE p.id_utilisateur = $1; `, [id]);
     res.json(result.rows);
-    // res.status(200).json(result.rows);
   } catch (err) {
     console.error("Erreur lors de la récupération du panier :", err);
     res.status(500).json({ message: "Erreur serveur" });

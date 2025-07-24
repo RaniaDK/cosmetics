@@ -4,8 +4,6 @@ import "./Commandes.css";
 function Commandes({ panier, total, utilisateurId, onClose, onCommandeSuccess }) {
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
-
-  // Champs client
   const [nomClient, setNomClient] = useState("");
   const [adresse, setAdresse] = useState("");
   const [telephone, setTelephone] = useState("");
@@ -16,10 +14,7 @@ function Commandes({ panier, total, utilisateurId, onClose, onCommandeSuccess })
       setPopupVisible(true);
       return;
     }
-
     try {
-        console.log("Contenu du panier :", panier);
-
       const produits = panier.map((item) => ({
       id_produit: item.id_produit,
       quantite: item.quantite,
@@ -39,22 +34,18 @@ function Commandes({ panier, total, utilisateurId, onClose, onCommandeSuccess })
         }),
         });
 
-
       const data = await res.json();
-      console.log(JSON.stringify(data))
-
       if (!res.ok) {
         setPopupMessage(`❌ Erreur lors de la commande : ${data.message || "Erreur inconnue"}`);
         setPopupVisible(true);
         return;
       }
-
       setPopupMessage("✅ Commande passée avec succès !");
       setPopupVisible(true);
       setTimeout(() => {
         setPopupVisible(false);
-        if (onCommandeSuccess) onCommandeSuccess(); // vider le panier
-        if (onClose) onClose(); // fermer la popup
+        if (onCommandeSuccess) onCommandeSuccess(); 
+        if (onClose) onClose(); 
       }, 1500);
     } catch (err) {
       console.error("❌ Erreur réseau :", err);
@@ -67,30 +58,12 @@ function Commandes({ panier, total, utilisateurId, onClose, onCommandeSuccess })
     <div className="popup-overlay">
       <div className="popup">
         <h3>Confirmation de commande</h3>
-
         <p>Remplissez vos informations pour finaliser la commande :</p>
-
         <div className="form-client">
-          <input
-            type="text"
-            placeholder="Votre nom complet"
-            value={nomClient}
-            onChange={(e) => setNomClient(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Adresse de livraison"
-            value={adresse}
-            onChange={(e) => setAdresse(e.target.value)}
-          />
-          <input
-            type="tel" 
-            placeholder="Numéro de téléphone"
-            value={telephone}
-            onChange={(e) => setTelephone(e.target.value)}
-          />
+          <input type="text" placeholder="Votre nom complet" value={nomClient} onChange={(e) => setNomClient(e.target.value)} required/>
+          <input type="text" placeholder="Adresse de livraison" value={adresse} onChange={(e) => setAdresse(e.target.value)} required/>
+          <input type="tel"  placeholder="Numéro de téléphone" value={telephone} onChange={(e) => setTelephone(e.target.value)} maxLength="8" minLength="8" required/>
         </div>
-
         <h4>Produits :</h4>
         <ul className="liste-produits">
           {panier.map((item, index) => (
@@ -99,23 +72,19 @@ function Commandes({ panier, total, utilisateurId, onClose, onCommandeSuccess })
             </li>
           ))}
         </ul>
-
-        <p className="popup-total">
-          Total : <strong>{total.toFixed(2)} TND</strong>
-        </p>
-
+        <p className="popup-total"> Total : <strong>{total.toFixed(2)} TND</strong></p>
         <div className="popup-actions">
           <button className="btn-confirmer" onClick={handleConfirmer}>✅ Confirmer</button>
           <button className="btn-annuler" onClick={onClose}>❌ Annuler</button>
         </div>
-        
-      {popupVisible && (
-        <div className="popup-message">
-          <p>{popupMessage}</p>
-        </div>
-      )}
+        {popupVisible && (
+        <div className="overlay" id="popupMessage">
+          <div className="popup-box">
+            <p>{popupMessage}</p>
+            <button onClick={() => setPopupVisible(false)} className="btn-fermer">Fermer</button>
+          </div>
+        </div>)}
       </div>
-
     </div>
   );
 }
