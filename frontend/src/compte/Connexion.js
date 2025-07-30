@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import "./Connexion.css";
 
 function Connexion() {
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [popupMessage, setPopupMessage] = useState("");
@@ -26,7 +27,7 @@ function Connexion() {
       });
 
       const data = await res.json();
-
+        
       if (!res.ok) {
         setPopupMessage(data.message);
         setPopupVisible(true);

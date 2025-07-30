@@ -11,8 +11,7 @@ async function insererAdmin() {
       ["rania", "rania1@gmail.com", motDePasseHashe, "client"]
     );
 
-    console.log("✅ client inséré avec succès !");
-  } catch (err) {
+   } catch (err) {
     console.error("❌ Erreur insertion client :", err);
   } finally {
     pool.end();

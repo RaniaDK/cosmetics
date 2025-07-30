@@ -59,8 +59,7 @@ router.get('/', async (req, res) => {
 router.put('/:id/statut', async (req, res) => {
   const { id } = req.params;
   const { statut } = req.body;
-
-  try {
+   try {
     const result = await db.query(
       'UPDATE commandes SET statut = $1 WHERE id = $2 RETURNING *',
       [statut, id]
@@ -70,32 +69,29 @@ router.put('/:id/statut', async (req, res) => {
       return res.status(404).json({ message: "Commande non trouvée" });
     }
 
-    if (statut === "Confirmée") {
-      console.log("confirmé")
-    const commande = await db.query(
-      'SELECT id_utilisateur FROM commandes WHERE id = $1',
-      [id]
-    );
-    const id_utilisateur = commande.rows[0].id_utilisateur;
-    const historique = await db.query(
-      `SELECT pa.id_produit, pa.quantite, p.prix
-      FROM panier_archive pa
-      JOIN produits p ON pa.id_produit = p.id
-      WHERE pa.id_utilisateur = $1 AND pa.id_commande = $2`,
-      [id_utilisateur, id]
-    );
-console.log("historique.rows",historique.rows)
-    for (const item of historique.rows) {
-      await db.query(
-        'INSERT INTO commande_items (id_commande, id_produit, quantite, prix_unitaire) VALUES ($1, $2, $3, $4)',
-        [id, item.id_produit, item.quantite, item.prix]
+    if (statut === "confirmée") {
+      const commande = await db.query(
+        'SELECT id_utilisateur FROM commandes WHERE id = $1',
+        [id]
       );
+      const id_utilisateur = commande.rows[0].id_utilisateur;
       await db.query(
-        'UPDATE produits SET stock = stock - $1 WHERE id = $2',
-        [item.quantite, item.id_produit]
+        `INSERT INTO commande_items (id_commande, id_produit, quantite, prix_unitaire)
+        SELECT pa.id_commande, pa.id_produit, pa.quantite, p.prix
+        FROM panier_archive pa
+        JOIN produits p ON pa.id_produit = p.id
+        WHERE pa.id_commande = $1`,
+        [id]
+      );
+
+      await db.query(
+        `UPDATE produits
+        SET stock = stock - pa.quantite
+        FROM panier_archive pa
+        WHERE produits.id = pa.id_produit AND pa.id_commande = $1`,
+        [id]
       );
     }
-  }
 
 
     if (statut === "Annulée") {
@@ -116,12 +112,12 @@ console.log("historique.rows",historique.rows)
 
     res.json({ message: "Statut mis à jour avec succès", commande: result.rows[0] });
   } catch (err) {
+    console.log("Erreur de mise à jour du statut :", err);
+
     console.error("Erreur de mise à jour du statut :", err);
     res.status(500).json({ message: "Erreur serveur" });
   }
 });
-
-
 
 
 module.exports = router;

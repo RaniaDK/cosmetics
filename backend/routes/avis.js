@@ -22,8 +22,7 @@ const db = require('../db');
 router.get('/', async (req, res) => {
   try {
     const result = await db.query('SELECT * FROM avis');
-    console.log("result",result)
-    res.json(result.rows); 
+     res.json(result.rows); 
   } catch (err) {
     console.error('Erreur de récupération des avis', err);
     res.status(500).json({ message: 'Erreur serveur' });

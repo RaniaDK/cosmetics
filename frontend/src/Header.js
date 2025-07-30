@@ -2,8 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import "./App.css";
 import { useState, useEffect } from "react";
 import { Link as ScrollLink } from "react-scroll";
+import { useContext } from "react";
+import { CartContext } from "./panier/CartContext";
+
 
 function Header() {
+  const { cartCount } = useContext(CartContext);
   const [nom, setNom] = useState(null);
   const navigate = useNavigate();
 
@@ -23,6 +27,7 @@ function Header() {
     localStorage.removeItem("nom");
     localStorage.removeItem("utilisateur_id");
     setNom(null);
+    window.dispatchEvent(new Event("storage"));
     navigate("/Accueil");
   };
 
@@ -35,7 +40,7 @@ function Header() {
         <ul className="nav-links">
           <li><Link to="/Accueil">Accueil</Link></li>
           <li><ScrollLink to="contact" smooth={true} duration={500}>Contact</ScrollLink></li>
-          <li><Link to="/Panier">Panier</Link></li>
+          <li><Link to="/Panier">Panier ({cartCount})</Link></li>
           <li><Link to="/APropos"> À propres</Link></li>
           {nom ? (
             <>

@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import "./NouveauxProduits.css";
+import { useContext } from "react";
+import { CartContext } from "../panier/CartContext";
 
 function NouveauxProduits() {
+  const { setCartCount } = useContext(CartContext);
   const [produits, setProduits] = useState([]);
     const [popupMessage, setPopupMessage] = useState("");
   const [popupVisible, setPopupVisible] = useState(false);
@@ -35,9 +38,14 @@ const ajouterAuPanier = async (id_produit) => {
         id_produit,
        
       }),
+      
     });
 
     const data = await res.json();
+     if (res.ok) {
+      // ✅ Mettre à jour le compteur seulement si l'ajout a réussi
+      setCartCount((prev) => prev + 1);
+    }
     setPopupMessage(data.message);
     setPopupVisible(true);
   } catch (err) {

@@ -8,13 +8,18 @@ function Accueil() {
   const [searchTerm, setSearchTerm] = useState("");
   const [categorie, setCategorie] = useState("");
   const [categories, setCategories] = useState([]); 
+   const [nom, setNom] = useState(null);
 
   useEffect(() => {
+    const nomUtilisateur = localStorage.getItem("nom");
+    setNom(nomUtilisateur || null);
+
     fetch("http://localhost:5000/api/categories")
       .then((res) => res.json())
       .then((data) => setCategories(data))
       .catch((err) => console.error("Erreur chargement catégories:", err));
-  }, []);
+      }, [window.location.pathname]);
+ 
 
   function BarreRecherche() {
     return (
@@ -72,9 +77,15 @@ function Accueil() {
               Découvrez une collection unique de produits cosmétiques naturels, élégants et faits pour vous sublimer. 🌸
             </p>
             <div className="accueil-buttons">
-              <Link to="/Connexion" className="btn-principal">
+              {nom ? (
+            <>
+            </>
+          ) : (
+            // <li><Link to="/Connexion">Connexion</Link></li>
+            <Link to="/Connexion" className="btn-principal">
                 Se connecter
               </Link>
+          )}
               <Link to="/NouveauxProduits" className="btn-secondaire">
                 Voir la boutique
               </Link>
