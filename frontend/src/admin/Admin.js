@@ -3,6 +3,35 @@ import { useNavigate } from "react-router-dom";
 import "./Admin.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faTachometerAlt,faChartBar,faUsers,faShoppingCart,faSignOutAlt,faBars,faBox,} from "@fortawesome/free-solid-svg-icons";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+
+function StatistiquesVentes() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/statistiques/ventes-par-produit")
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((err) => console.error("Erreur chargement stats :", err));
+  }, []);
+
+  return (
+    <div className="chart-container">
+      <h2 className="chart-title">📊 Statistiques des ventes</h2>
+      <ResponsiveContainer>
+        <LineChart data={data}>
+          <CartesianGrid strokeDasharray="4 3" />
+          <XAxis dataKey="produit" />
+          <YAxis allowDecimals={false} />
+          <Tooltip />
+          <Line type="monotone" dataKey="total_vendu" stroke="#ff6b81" strokeWidth={3} />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
+
+
 
 function Admin() {
   const [nbClients, setNbClients] = useState(0);
@@ -116,9 +145,11 @@ function Admin() {
               <FontAwesomeIcon icon={faShoppingCart} className="card-icon" />
             </div>
           </div>
+          <StatistiquesVentes />
         </section>
       </main>
     </div>
+    
   );
 }
 

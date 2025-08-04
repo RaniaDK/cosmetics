@@ -38,6 +38,33 @@ function Panier() {
 
   const total = panier.reduce((acc, item) => acc + item.prix * item.quantite, 0);
 
+    const modifierQuantite = async (id_produit, nouvelleQuantite) => {
+  if (nouvelleQuantite <= 0) {
+    supprimerProduit(id_produit); // Si 0, on supprime
+    return;
+  }
+
+  try {
+    const res = await fetch(`http://localhost:5000/api/panier/${id_utilisateur}/${id_produit}`, {
+      method: "PUT", // ⚠️ Il faut créer une route PUT dans ton backend
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ quantite: nouvelleQuantite }),
+    });
+
+    if (!res.ok) throw new Error("Erreur mise à jour quantité");
+
+    setPanier((prevPanier) =>
+      prevPanier.map((item) =>
+        item.id_produit === id_produit
+          ? { ...item, quantite: nouvelleQuantite }
+          : item
+      )
+    );
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour de la quantité :", error);
+  }
+};
+
   return (
     <div className="panier-container">
       <h2 className="panier-title">Mon Panier</h2>
@@ -65,7 +92,27 @@ function Panier() {
               <tr key={id_produit}>
                 <td>{nom}</td>
                 <td>{parseFloat(prix).toFixed(2)} TND</td>
-                <td>{quantite}</td>
+                <td>
+                  <div className="quantite-container">
+                    <button
+                      className="btn-quantite"
+                      onClick={() => modifierQuantite(id_produit, quantite - 1)}
+                    >
+                      –
+                    </button>
+
+                    <span className="quantite-value">{quantite}</span>
+
+                    <button
+                      className="btn-quantite"
+                      onClick={() => modifierQuantite(id_produit, quantite + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+                </td>
+
+
                 <td>{(parseFloat(prix) * quantite).toFixed(2)} TND</td>
                 <td>
                   <button className="btn-supprimer" onClick={() => supprimerProduit(id_produit)}>Supprimer</button>

@@ -76,6 +76,26 @@ router.get('/count', async (req, res) => {
     res.status(500).json({ message: "Erreur serveur" });
   }
 });
+// ✅ Modifier la quantité d’un produit
+router.put('/:id_utilisateur/:id_produit', async (req, res) => {
+  const { id_utilisateur, id_produit } = req.params;
+  const { quantite } = req.body;
+
+  if (!quantite || isNaN(quantite) || quantite < 1) {
+    return res.status(400).json({ message: "Quantité invalide" });
+  }
+
+  try {
+    await db.query(
+      "UPDATE panier SET quantite = $1 WHERE id_utilisateur = $2 AND id_produit = $3",
+      [quantite, id_utilisateur, id_produit]
+    );
+    res.json({ message: "Quantité mise à jour" });
+  } catch (err) {
+    console.error("Erreur mise à jour quantité :", err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+});
 
 
 // ✅ Supprimer un produit du panier

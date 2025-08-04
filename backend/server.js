@@ -33,7 +33,8 @@ app.use("/api/categories", categoriesRouter);
 
 
 const statistiquesRoutes = require("./routes/statistiques");
-app.use("/api", statistiquesRoutes);
+app.use("/api/statistiques", statistiquesRoutes);
+
 
 const commandesRoutes = require('./routes/commandes');
 app.use('/api/commandes', commandesRoutes);
